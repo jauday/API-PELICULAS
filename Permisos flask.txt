@@ -1,0 +1,28 @@
+Si hay un error de permisos o algo asi:
+
+Set-ExecutionPolicy RemoteSigned -Force  (este no es muy seguro, pero lo pones esa vez y ya está. A mi me tira error)
+
+Set-ExecutionPolicy Unrestricted -Scope Process (este hay que ponerlo en la terminal cada vez que se abra VS code)
+
+(explicacion: https://stackoverflow.com/questions/18713086/virtualenv-wont-activate-on-windows)
+
+=======================
+
+activar flask en la terminal: 
+.venv\Scripts\Activate.ps1
+
+=======================
+
+Pagina oficial donde esta el tutorial de Flask:
+
+https://code.visualstudio.com/docs/python/tutorial-flask
+
+
+=======================
+
+Para abrir el servidor y nos mande a lo que estamos haciendo:
+
+flask run (en la terminal. La terminal tiene que decir (.venv) en verde)
+
+Ctrl + Click sobre el link de nuestro servidor local, q es http://127.0.0.1:5000
+Para q se cierre, Ctrl + C en la terminal 
