@@ -118,3 +118,13 @@ def portada():
 def ABM():
     a=a
     return a
+
+
+#====================================
+#FUNCIONALIDAD ADICIONAL
+#====================================
+
+@app.route("/buscar") #Es un buscador q devuelve peliculas, directores, generos, etc
+def buscar():
+    a=a
+    return a
