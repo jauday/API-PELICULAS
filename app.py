@@ -1,20 +1,27 @@
-from flask import Flask, jsonify, Response, request
+from flask import Flask, jsonify, Response, request, redirect
 from http import HTTPStatus
 
 app = Flask(__name__)
 
 
 #====================================
+#ROOT
+#====================================
+
+@app.route("/")
+def home():
+    return redirect("/login", code=302)
+
+#====================================
 #ES EL LUGAR DONDE SE MUESTRAN LAS PELICULAS
 #====================================
 
 
-@app.route("/home")
-def home():
-    a=a
-    return a
+@app.route("/home") #Hacer q sean solo las 10 ultimas. Hacerlo con un for/while y una variable q se el vaya sumando
+def listaPelis():
+    return jsonify(peliculas)
 
-@app.route("/home/<pelicula>", methods=["GET"])
+@app.route("/home/<id>")
 def mostrar(): #ACA SE MUESTRA LA INFO DE UNA PELICULA
     a=a
     return a
@@ -26,7 +33,7 @@ def mostrar(): #ACA SE MUESTRA LA INFO DE UNA PELICULA
 
 
 
-@app.route("/login", methods=["GET","POST"])
+@app.route("/login", methods=["POST"])
 #Si se encuentra el usuario, q siga, sino q large un erro
 #Si entra como anonimo, el usuario es anonimo, se le da el valor de "anonimo"
 def login() :
@@ -54,36 +61,64 @@ def login() :
 
 
 
-
-
-
 #====================================
 #ACA VA LA PARTE DE LO QUE PUEDE HACER EL USUARIO
 #====================================
-@app.route("/home/<pelicula>/comentarios", methods=["GET","PUT"])
-def comentarios():
-    #Es para mostrar los comentarios y agregar comentarios
-    #Con el GET los muestra, con el PUT los agrega
-    #Siempre chequear que el usuario este registrado
-    a=a
-    return a
+
+@app.route("/home/agregar", methods=["POST"]) #Agrega peliculas
+def agregarPelis(): #Falta que compruebe si el usuario es anonimo o no
+
+    if request.method == "POST":
+        id = 20 #Ver alguna forma de q el numero suba solo, sin determinar esta variable
+        id += 1 #O hacer un aleatoreo y una lista con los numeros ya utilizados
+
+        #with open("pruebaArch.json") as listaDeP:
+        #    archivo = json.load(listaDeP)
+
+        #archivoEscritura = open("pruebaArch.json", "a")
+        #archivoEscritura.write(archivo["peliculas"].append()
+
+        datos_cliente = request.get_json()
+
+        if "nombre" in datos_cliente: 
+            peliculas.append({
+                "id": id,
+                "nombre" : datos_cliente["nombre"],
+                "director" : datos_cliente["director"],
+                "genero" : datos_cliente["genero"],
+                "cartelera" : datos_cliente["cartelera"]}
+            )
+
+        return jsonify(peliculas)
 
 
-@app.route("/home/<pelicula>", methods=["DELETE"])
-def borrar():
+    else:
+        return Response("{}", status=HTTPStatus.BAD_GATEWAY)
+
+
+@app.route("/home/<id>", methods=["DELETE"])
+def borrar(id):
     #Es para borrar una peli, verificar q no tenga comentarios
     #Siempre chequear que el usuario este registrado
     a=a
     return a
 
 
-@app.route("/home/<pelicula>", methods=["PUT"])
-def editar():
+@app.route("/home/<id>", methods=["PUT"])
+def editar(id):
     #Editar solo los datos de la peli, no los comentarios
     #Siempre chequear que el usuario este registrado
     a=a
     return a
+    
 
+@app.route("/home/<id>/comentarios", methods=["GET","PUT"])
+def comentarios(id):
+    #Es para mostrar los comentarios y agregar comentarios
+    #Con el GET los muestra, con el PUT los agrega
+    #Siempre chequear que el usuario este registrado
+    a=a
+    return a
 
 
 #====================================
@@ -114,7 +149,7 @@ def portada():
     a=a
     return a
 
-@app.route("/ABM", methods=["GET"]) #Devuelve la puntuacion de cada pelicula
+@app.route("/ABM", methods=["GET"]) #Devuelve la alta, baja, y no se q mas
 def ABM():
     a=a
     return a
@@ -125,6 +160,42 @@ def ABM():
 #====================================
 
 @app.route("/buscar") #Es un buscador q devuelve peliculas, directores, generos, etc
-def buscar():
+def buscar(): #Q vaya agregando tambien que fue lo ultimo buscado en otra lista
     a=a
     return a
+
+
+#====================================
+#LISTAS
+#====================================
+
+peliculas = [
+    {
+        "id" : 127,
+        "nombre" : "Titanic",
+        "director" : "Burton",
+        "genero" : "Romance",
+        "cartelera" : None
+    },
+    {
+        "id" : 20,
+        "nombre" : "28",
+        "director" : "Williams",
+        "genero" : "Comedia",
+        "cartelera" : True
+    },
+    {
+        "id" : 5,
+        "nombre" : "Trucy",
+        "director" : "Shakespeare",
+        "genero" : "Drama",
+        "cartelera" : False
+    },
+    {
+        "id" : 65,
+        "nombre" : "Fabrica de chocolates",
+        "director" : "Burton",
+        "genero" : "Infaltil",
+        "cartelera" : True
+    }
+]
