@@ -1,5 +1,6 @@
 from flask import Flask, jsonify, Response, request, redirect
 from http import HTTPStatus
+import json
 
 app = Flask(__name__)
 
@@ -31,33 +32,37 @@ def mostrar(): #ACA SE MUESTRA LA INFO DE UNA PELICULA
 #LOGIN
 #====================================
 
+@app.route("/login")  #Este es con el metodo GET
+def getUsuarios():
+    with open("usuarios.json") as bienvenida:
+        archivo = json.load(bienvenida)
+
+        for saludo in archivo["ingreso"]:
+            return jsonify(archivo["ingreso"])
 
 
-@app.route("/login", methods=["POST"])
-#Si se encuentra el usuario, q siga, sino q large un erro
-#Si entra como anonimo, el usuario es anonimo, se le da el valor de "anonimo"
-def login() :
-    if (request.method==["GET"]):
-        a=a
-        #Aca tiene q mostrar los datos
+@app.route("/login", methods=["GET","POST"]) #Aca se permite el get y post, xq sino te manda el Bad Getaway
+def login():
+    if request.method == "POST":
 
-    elif (request.method==["POST"]): #aca se le manda la info para verificar
-        if (usuario == True): #si ingresa como usuario
-            usuario=usuario
-            #Aca tendria q mostrar que ingreso con usuario y todos los permisos q se le da")
-            #Despues los manda al home
+        with open("usuarios.json") as listaUsuarios:
+            archivo = json.load(listaUsuarios)
 
+        datos_cliente = request.get_json()
 
-        elif (usuario == False): #ingresa como anonimo
-            #Aca lo manda directo a ver el home
-            a=a
+        for acceso in archivo["usuarios"]:  
 
-        else:
-            a=a
-            return Response("{}", status=HTTPStatus.NOT_FOUND)
+            if (("nombre" in datos_cliente) and ("password" in datos_cliente)):
+                
+                if ( (acceso["nombre"] == datos_cliente["nombre"]) and (acceso["password"] == datos_cliente["password"]) ):
+                    return Response("Bienvenido!", status=HTTPStatus.OK)
+
+        return Response("Datos incorrectos", status=HTTPStatus.OK) #Fijarse dsps si queda el OK o el BadR
 
     else:
-        return Response("{}", status=HTTPStatus.NOT_FOUND)
+        return Response("{}", status=HTTPStatus.BAD_GATEWAY)
+
+#Que despues te mande al home
 
 
 

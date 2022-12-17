@@ -1,0 +1,33 @@
+{
+    "ingreso" : [
+
+        {
+            "bienvenida":"Por favor ingrese su usuario y contrasenia.Si desea ingresar como anonimo, escriba 'anonimo' en usuario y contrasenia",
+            "Estructura:": {
+                "nombre" : "-nombre usuario-",
+                "password" : "-contrasenia usuario-"
+            }
+        }
+    
+    ],
+    
+    "usuarios" : [
+        {
+            "nombre":"admin",
+            "password":"admin"
+        },
+        {
+            "nombre":"admin1",
+            "password":"admin1"
+        },
+        {
+            "nombre":"user0",
+            "password":"user0"
+        },
+        {
+            "nombre":"anonimo",
+            "password":"anonimo"
+        }
+    ]
+
+}
