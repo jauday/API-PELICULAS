@@ -1,0 +1,61 @@
+{
+    "peliculas" : [
+        {
+            "id" : 127,
+            "titulo" : "Titanic",
+            "anio" : 2009,
+            "director" : "Burton",
+            "genero" : "Romance",
+            "sinopsis" : "Aca va una sinopsis",
+            "cartelera" : true,
+            "AMB" : "alta",
+            "comentarios" : []
+        },
+        {
+            "id" : 20,
+            "titulo" : "28",
+            "anio" : 2018,
+            "director" : "Williams",
+            "genero" : "Comedia",
+            "sinopsis" : "Agregar otra sinopsis",
+            "cartelera" : null,
+            "AMB" : "alta",
+            "comentarios" : []
+        },
+        {
+            "id" : 5,
+            "titulo" : "Trucy",
+            "anio" : 2013,
+            "director" : "Shakespeare",
+            "genero" : "Drama",
+            "sinopsis" : "Agregar una sinopsis",
+            "cartelera" : null,
+            "AMB" : "modificacion",
+            "comentarios" : []
+        },
+        {
+            "id" : 65,
+            "titulo" : "Fabrica de chocolates",
+            "anio" : 1990,
+            "director" : "Burton",
+            "genero" : "Infaltil",
+            "sinopsis" : "Hay un boleto y una fabrica de chocolates",
+            "cartelera" : true,
+            "AMB" : "alta",
+            "comentarios" : []
+        }
+        ,
+        {
+            "id" : 355,
+            "titulo" : "Tomorrow",
+            "anio" : 1970,
+            "director" : "Espuria",
+            "genero" : "Thrilles",
+            "sinopsis" : "Inventar una sinopsis",
+            "cartelera" : true,
+            "AMB" : "modificacion",
+            "comentarios" : []
+        }
+    ]
+
+}
