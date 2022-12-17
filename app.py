@@ -20,12 +20,22 @@ def home():
 
 @app.route("/home") #Hacer q sean solo las 10 ultimas. Hacerlo con un for/while y una variable q se el vaya sumando
 def listaPelis():
-    return jsonify(peliculas)
+    return jsonify(peliculas) #Aca falta q devuelva el json
 
-@app.route("/home/<id>")
-def mostrar(): #ACA SE MUESTRA LA INFO DE UNA PELICULA
-    a=a
-    return a
+@app.route("/home/<id>") #probar sin el json
+def buscarPeli(id):
+
+    with open("peliculas.json") as listaDeP:
+        archivo = json.load(listaDeP)
+
+    id_num = int(id)
+
+    for pelis in archivo["peliculas"]:
+        if pelis["id"] == id_num:
+            dondeID = archivo["peliculas"].index(pelis)
+            return jsonify(archivo["peliculas"][dondeID])
+
+        #aACA VA LO Q SUCEDE CUANDO NO COINCIDEN
 
 
 #====================================
@@ -74,28 +84,34 @@ def login():
 def agregarPelis(): #Falta que compruebe si el usuario es anonimo o no
 
     if request.method == "POST":
-        id = 20 #Ver alguna forma de q el numero suba solo, sin determinar esta variable
-        id += 1 #O hacer un aleatoreo y una lista con los numeros ya utilizados
 
-        #with open("pruebaArch.json") as listaDeP:
-        #    archivo = json.load(listaDeP)
+        id = 32
 
-        #archivoEscritura = open("pruebaArch.json", "a")
-        #archivoEscritura.write(archivo["peliculas"].append()
+        listaDeP = open("pruebaArch.json", "r+")
+        archivo = json.load(listaDeP)
+
+        #========================================
 
         datos_cliente = request.get_json()
 
-        if "nombre" in datos_cliente: 
-            peliculas.append({
+        if "titulo" in datos_cliente:  #Aca chequea de que se escribio un titulo, despues agregar todo lo q tiene q chequear
+            nuevaPelicula = {
                 "id": id,
-                "nombre" : datos_cliente["nombre"],
+                "titulo" : datos_cliente["nombre"],
+                "anio" : datos_cliente["anio"],
                 "director" : datos_cliente["director"],
                 "genero" : datos_cliente["genero"],
-                "cartelera" : datos_cliente["cartelera"]}
-            )
+                "sinopsis" : datos_cliente["sinopsis"],
+                "cartelera" : datos_cliente["cartelera"],
+                "AMB" : datos_cliente["AMB"],
+                "comentarios" : [],
+            }
+                
+            #agregar = archivo["peliculas"].append(nuevaPelicula)
 
-        return jsonify(peliculas)
+            archivo["peliculas"].write(json.dumps(nuevaPelicula))
 
+            return jsonify(archivo["peliculas"][-1])
 
     else:
         return Response("{}", status=HTTPStatus.BAD_GATEWAY)
