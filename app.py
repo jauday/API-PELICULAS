@@ -125,12 +125,23 @@ def borrar(id):
     return a
 
 
-@app.route("/home/<id>", methods=["PUT"])
+@app.route("/home/editar/<id>", methods=["PUT"])
 def editar(id):
+    pelicula = buscarPeli(id)
+    #if (pelicula != null  ): #falta chequeo de usuario
+        pelicula['titulo']= request.json['titulo']
+        pelicula['anio']= request.json['anio']
+        pelicula['director']= request.json['director']
+        pelicula['genero']= request.json['genero']
+        pelicula['sinopsis']= request.json['sinopsis']
+        pelicula['cartelera']= request.json['cartelera']
+        return jsonify({
+            'message': 'Success',
+            'pelicula': pelicula
+        })
+    return jsonify({'message': 'Movie Not found'})
     #Editar solo los datos de la peli, no los comentarios
     #Siempre chequear que el usuario este registrado
-    a=a
-    return a
     
 
 @app.route("/home/<id>/comentarios", methods=["GET","PUT"])
