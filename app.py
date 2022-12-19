@@ -21,20 +21,22 @@ def home():
 
 @app.route("/home") #Hacer q sean solo las 10 ultimas. Hacerlo con un for/while y una variable q se el vaya sumando
 def listaPelis():
-    return jsonify(peliculas) #Aca falta q devuelva el json
-
+    with open("peliculas.json") as archivoPelis:
+        pelisjson = json.load(archivoPelis)
+    return pelisjson 
+    
 @app.route("/home/<id>")
 def buscarPeli(id):
 
-    with open("peliculas.json") as listaDeP:
-        archivo = json.load(listaDeP)
+    with open("peliculas.json") as archivoPelis:
+        pelisJson = json.load(archivoPelis)
 
     id_num = int(id)
 
-    for pelis in archivo["peliculas"]:
+    for pelis in pelisJson["peliculas"]:
         if pelis["id"] == id_num:
-            dondeID = archivo["peliculas"].index(pelis)
-            return jsonify(archivo["peliculas"][dondeID])
+            dondeID = pelisJson["peliculas"].index(pelis)
+            return jsonify(pelisJson["peliculas"][dondeID])
 
         #aACA VA LO Q SUCEDE CUANDO NO COINCIDEN
 
@@ -116,8 +118,7 @@ def agregarPelis(): #Falta que compruebe si el usuario es anonimo o no
                 "director" : datos_cliente["director"],
                 "genero" : datos_cliente["genero"],
                 "sinopsis" : datos_cliente["sinopsis"],
-                "cartelera" : datos_cliente["cartelera"], #Hacer q pueda aceptar "" como none o false, y links
-                "AMB" : "subida", 
+                "cartelera" : datos_cliente["cartelera"], #Hacer q pueda aceptar "" como none o false, y links 
                 "comentarios" : [],
             }
                 
@@ -142,7 +143,7 @@ def borrar(id):
 @app.route("/home/editar/<id>", methods=["PUT"])
 def editar(id):
     pelicula = buscarPeli(id)
-    #if (pelicula != null  ): #falta chequeo de usuario
+    if (pelicula): #falta chequeo de usuario
         pelicula['titulo']= request.json['titulo']
         pelicula['anio']= request.json['anio']
         pelicula['director']= request.json['director']
@@ -153,7 +154,9 @@ def editar(id):
             'message': 'Success',
             'pelicula': pelicula
         })
-    return jsonify({'message': 'Movie Not found'})
+    else:
+        return jsonify({'Movie Not found': HTTPStatus.NOT_FOUND})
+
     #Editar solo los datos de la peli, no los comentarios
     #Siempre chequear que el usuario este registrado
     
@@ -278,33 +281,33 @@ def buscar(): #Q vaya agregando tambien que fue lo ultimo buscado en otra lista
 #LISTAS
 #====================================
 
-peliculas = [
-    {
-        "id" : 127,
-        "nombre" : "Titanic",
-        "director" : "Burton",
-        "genero" : "Romance",
-        "cartelera" : None
-    },
-    {
-        "id" : 20,
-        "nombre" : "28",
-        "director" : "Williams",
-        "genero" : "Comedia",
-        "cartelera" : True
-    },
-    {
-        "id" : 5,
-        "nombre" : "Trucy",
-        "director" : "Shakespeare",
-        "genero" : "Drama",
-        "cartelera" : False
-    },
-    {
-        "id" : 65,
-        "nombre" : "Fabrica de chocolates",
-        "director" : "Burton",
-        "genero" : "Infaltil",
-        "cartelera" : True
-    }
-]
+# peliculas = [
+#     {
+#         "id" : 127,
+#         "nombre" : "Titanic",
+#         "director" : "Burton",
+#         "genero" : "Romance",
+#         "cartelera" : None
+#     },
+#     {
+#         "id" : 20,
+#         "nombre" : "28",
+#         "director" : "Williams",
+#         "genero" : "Comedia",
+#         "cartelera" : True
+#     },
+#     {
+#         "id" : 5,
+#         "nombre" : "Trucy",
+#         "director" : "Shakespeare",
+#         "genero" : "Drama",
+#         "cartelera" : False
+#     },
+#     {
+#         "id" : 65,
+#         "nombre" : "Fabrica de chocolates",
+#         "director" : "Burton",
+#         "genero" : "Infaltil",
+#         "cartelera" : True
+#     }
+# ]
