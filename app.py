@@ -175,11 +175,11 @@ def borrar(id):
     
     id_num = int(id)
     if ((request.method == 'DELETE') and (ingreso == True)):   
-        if id_num: #and ingreso: #TODO CHEQUEAR USUARIO
+        if ((id_num) and (ingreso == True)):
             with open("peliculas.json", 'r+') as archivoPelis:
                 pelisjson = json.load(archivoPelis)
             for pelis in pelisjson["peliculas"]:
-                if pelis["id"] == id_num:
+                if ((pelis["id"] == id_num) and (pelis["tieneCom"] == 0)):
                     dondeID = pelisjson["peliculas"].index(pelis)
             pelisjson["peliculas"].pop(dondeID)
             with open("peliculas.json", 'w') as archivoPelis:
@@ -196,7 +196,7 @@ def editar(id):
         with open("peliculas.json", 'r') as archivoPelis:
             pelisjson = json.load(archivoPelis)
         for peli in pelisjson["peliculas"]: 
-            if id_num == peli["id"]:
+            if ((id_num == peli["id"]) and (peli["tieneCom"] == 0)):
                 peli['titulo']= datos_cliente['titulo']
                 peli['anio']= datos_cliente['anio']
                 peli['director']= datos_cliente['director']

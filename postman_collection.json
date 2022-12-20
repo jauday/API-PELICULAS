@@ -1,0 +1,163 @@
+{
+	"info": {
+		"_postman_id": "53861f7f-c214-4d10-b6eb-b06c71f19807",
+		"name": "New Collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "23822154"
+	},
+	"item": [
+		{
+			"name": "GET ALL MOVIES",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:5000/home",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"home"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET BY ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:5000/home/65",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"home",
+						"65"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UPDATE MOVIE",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "id",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"titulo\": \"Charlie y Fabrica de chocolates\",\r\n    \"anio\": 2008,\r\n    \"director\": \"nombre del director\",\r\n    \"genero\": \"Infaltil\",\r\n    \"sinopsis\": \"Hay un boleto y una fabrica de chocolates\",\r\n    \"cartelera\": true\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:5000/home/65",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"home",
+						"65"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE MOVIE",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:5000/home/5",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"home",
+						"5"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST MOVIE",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:5000/home",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"home"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST COMMENTS",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"cometario\" : \"MUY linda pelicula super entretenida\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:5000/home/65/comentarios",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"home",
+						"65",
+						"comentarios"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
