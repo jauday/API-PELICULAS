@@ -176,46 +176,30 @@ def borrar(id):
                 archivoPelis.seek(0) 
                 json.dump(pelisjson, archivoPelis, indent=4)
         return Response("Pelicula eliminada", HTTPStatus.OK)  
-     
-
-
-                    # listaDeP = open("pruebaArch.json", "r+")
-                    # archivo = json.load(listaDeP)
-
-                    # listaDeP.seek(0)
-                    # archivo["peliculas"].pop(dondeID)
-                    # json.dump(archivo, listaDeP, indent=4)
-
     #Es para borrar una peli, verificar q no tenga comentarios
     #Siempre chequear que el usuario este registrado
 
-
-@app.route("/home", methods=["PUT"])
-def editar():
-
+@app.route("/home/<id>", methods=["PUT"])
+def editar(id):
+    id_num = int(id)
     datos_cliente = request.get_json()
-    if "id" in datos_cliente: #TODO CHEQUEAR USUARIO
-        with open("pelisjson.json", 'r+') as archivoPelis:
+    if id_num: #TODO CHEQUEAR USUARIO
+        with open("peliculas.json", 'r') as archivoPelis:
             pelisjson = json.load(archivoPelis)
-        for peli in pelisjson: 
-            print(peli)
-        print("---")
-        print(datos_cliente)
-        #if (datos_cliente["id"])==peli["id"]:
-        return("listo")
-    #             peli['titulo']= datos_cliente['titulo']
-    #             peli['anio']= datos_cliente['anio']
-    #             peli['director']= datos_cliente['director']
-    #             peli['genero']= datos_cliente['genero']
-    #             peli['sinopsis']= datos_cliente['sinopsis']
-    #             peli['cartelera']= datos_cliente['cartelera']
-    #             archivoPelis.seek(0)
-    #             json.dump(pelisjson, archivoPelis,  indent=4) 
-    #             return Response(peli, HTTPStatus.OK)
-    #         else:
-    #             return Response('Movie Not found', HTTPStatus.NOT_FOUND)
-    # else:
-    #     return Response('Id invalido o nulo', HTTPStatus.BAD_REQUEST)
+        for peli in pelisjson["peliculas"]: 
+            if id_num == peli["id"]:
+                peli['titulo']= datos_cliente['titulo']
+                peli['anio']= datos_cliente['anio']
+                peli['director']= datos_cliente['director']
+                peli['genero']= datos_cliente['genero']
+                peli['sinopsis']= datos_cliente['sinopsis']
+                peli['cartelera']= datos_cliente['cartelera']
+                with open("peliculas.json", 'w') as archivoPelis: 
+                    archivoPelis.seek(0)
+                    json.dump(pelisjson, archivoPelis,  indent=4) 
+            else: continue        
+        return Response("Pelicula actualizada", HTTPStatus.OK)
+    else: return Response('Id invalido o nulo', HTTPStatus.BAD_REQUEST)
 
     #Editar solo los datos de la peli, no los comentarios
     #Siempre chequear que el usuario este registrado
