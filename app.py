@@ -19,13 +19,13 @@ def home():
 #====================================
 
 
-@app.route("/home") #Hacer q sean solo las 10 ultimas. Hacerlo con un for/while y una variable q se el vaya sumando
+@app.route("/home", methods=["GET"] ) #Hacer q sean solo las 10 ultimas. Hacerlo con un for/while y una variable q se el vaya sumando
 def listaPelis():
     with open("peliculas.json") as archivoPelis:
         pelisjson = json.load(archivoPelis)
     return pelisjson 
     
-@app.route("/home/<id>")
+@app.route("/home/<id>", methods=["GET"])
 def buscarPeli(id):
 
     with open("peliculas.json") as archivoPelis:
@@ -83,7 +83,7 @@ def login():
 #ACA VA LA PARTE DE LO QUE PUEDE HACER EL USUARIO
 #====================================
 
-@app.route("/home/agregar", methods=["POST"])
+@app.route("/home", methods=["POST"])
 def agregarPelis(): #Falta que compruebe si el usuario es anonimo o no
 
     if request.method == "POST":
@@ -134,34 +134,49 @@ def agregarPelis(): #Falta que compruebe si el usuario es anonimo o no
 
 @app.route("/home/<id>", methods=["DELETE"])
 def borrar(id):
+    
+    id_num = int(id)
+    if request.method == 'DELETE':    
+        if id_num: #TODO CHEQUEAR USUARIO
+            with open("peliculas.json") as archivoPelis:
+                pelisjson = json.load(archivoPelis)
+            for peli in pelisjson["peliculas"]: 
+                if id_num == peli["id"]:
+                    return(peli)
+                ##    pelisjson.pop(["peliculas"].index(peli))
+        with open("peliculas.json",'w') as archivoPelis: 
+            json.dump(pelisjson, archivoPelis)
+        return Response("Pelicula eliminada", HTTPStatus.OK)   
     #Es para borrar una peli, verificar q no tenga comentarios
     #Siempre chequear que el usuario este registrado
-    a=a
-    return a
 
 
-@app.route("/home/editar/<id>", methods=["PUT"])
-def editar(id):
-    pelicula = buscarPeli(id)
-    if (pelicula): #falta chequeo de usuario
-        pelicula['titulo']= request.json['titulo']
-        pelicula['anio']= request.json['anio']
-        pelicula['director']= request.json['director']
-        pelicula['genero']= request.json['genero']
-        pelicula['sinopsis']= request.json['sinopsis']
-        pelicula['cartelera']= request.json['cartelera']
-        return jsonify({
-            'message': 'Success',
-            'pelicula': pelicula
-        })
+@app.route("/home", methods=["PUT"])
+def editar():
+
+    datos_cliente = request.get_json()
+    if "id" in datos_cliente: #TODO CHEQUEAR USUARIO
+        with open("peliculas.json", 'r+') as archivoPelis:
+            pelisjson = json.load(archivoPelis)
+        for peli in pelisjson: 
+            if datos_cliente["id"]==peli["id"]:
+                peli['titulo']= datos_cliente['titulo']
+                peli['anio']= datos_cliente['anio']
+                peli['director']= datos_cliente['director']
+                peli['genero']= datos_cliente['genero']
+                peli['sinopsis']= datos_cliente['sinopsis']
+                peli['cartelera']= datos_cliente['cartelera']
+                return Response(peli, HTTPStatus.OK)
+            else:
+                return Response('Movie Not found', HTTPStatus.NOT_FOUND)
     else:
-        return jsonify({'Movie Not found': HTTPStatus.NOT_FOUND})
+        return Response('Id invalido o nulo', HTTPStatus.BAD_REQUEST)
 
     #Editar solo los datos de la peli, no los comentarios
     #Siempre chequear que el usuario este registrado
     
 
-@app.route("/home/<id>/comentarios", methods=["GET","PUT"])
+@app.route("/movies/<id>/comentarios", methods=["GET","PUT"])
 def comentarios(id):
     #Es para mostrar los comentarios y agregar comentarios
     #Con el GET los muestra, con el PUT los agrega
@@ -266,7 +281,6 @@ def ABM():
     a=a
     return a
 
-
 #====================================
 #FUNCIONALIDAD ADICIONAL
 #====================================
@@ -275,39 +289,3 @@ def ABM():
 def buscar(): #Q vaya agregando tambien que fue lo ultimo buscado en otra lista
     a=a
     return a
-
-
-#====================================
-#LISTAS
-#====================================
-
-# peliculas = [
-#     {
-#         "id" : 127,
-#         "nombre" : "Titanic",
-#         "director" : "Burton",
-#         "genero" : "Romance",
-#         "cartelera" : None
-#     },
-#     {
-#         "id" : 20,
-#         "nombre" : "28",
-#         "director" : "Williams",
-#         "genero" : "Comedia",
-#         "cartelera" : True
-#     },
-#     {
-#         "id" : 5,
-#         "nombre" : "Trucy",
-#         "director" : "Shakespeare",
-#         "genero" : "Drama",
-#         "cartelera" : False
-#     },
-#     {
-#         "id" : 65,
-#         "nombre" : "Fabrica de chocolates",
-#         "director" : "Burton",
-#         "genero" : "Infaltil",
-#         "cartelera" : True
-#     }
-# ]
