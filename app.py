@@ -189,8 +189,7 @@ def borrar(id):
                 archivoPelis.seek(0) 
                 json.dump(pelisjson, archivoPelis, indent=4)
         return Response("Pelicula eliminada", HTTPStatus.OK)  
-    #Es para borrar una peli, verificar q no tenga comentarios
-    #Siempre chequear que el usuario este registrado
+
 
 @app.route("/home/<id>", methods=["PUT"])
 def editar(id):
@@ -214,8 +213,6 @@ def editar(id):
         return Response("Pelicula actualizada", HTTPStatus.OK)
     else: return Response('Id invalido o nulo', HTTPStatus.BAD_REQUEST)
 
-    #Editar solo los datos de la peli, no los comentarios
-    #Siempre chequear que el usuario este registrado
     
 #==============COMENTARIOS==============
 
@@ -308,14 +305,6 @@ def buscarGeneros():
     else:
         return Response("Metodo no permitido", status=HTTPStatus.BAD_GATEWAY)
 
-#====================================
-#ACA VA LA PARTE DE LO YA CARGADO EN EL SISTEMA
-#====================================
-
-#Siempre devuelve lo q se le pide al json.
-#Ej: Si es la aprte del ABM, va peli por peli y buscando todos los amd, y despues los devuelve en un jsonify
-
-
 @app.route("/directores")
 def buscarDirectores():
     if request.method == "GET":
@@ -378,11 +367,11 @@ def portada():
         conPortada = ["Con cartelera"]
         sinPortada = ["Sin cartelera"]
 
-#         cantidadPeliculas = len(archivo["peliculas"])
+        cantidadPeliculas = len(archivo["peliculas"])
 
-#         while (cantidadPeliculas > 0):
+        while (cantidadPeliculas > 0):
 
-            for pelis in archivo["peliculas"]: #si es iigual a 
+            for pelis in archivo["peliculas"]:
                 if (pelis["cartelera"] == " "):
 
                     pelicula = []
