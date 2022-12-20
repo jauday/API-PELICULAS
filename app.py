@@ -165,16 +165,27 @@ def borrar(id):
     
     id_num = int(id)
     if request.method == 'DELETE':    
-        if id_num: #TODO CHEQUEAR USUARIO
-            with open("peliculas.json") as archivoPelis:
+        if id_num: #and ingreso: #TODO CHEQUEAR USUARIO
+            with open("peliculas.json", 'r+') as archivoPelis:
                 pelisjson = json.load(archivoPelis)
-            for peli in pelisjson["peliculas"]: 
-                if id_num == peli["id"]:
-                    return(peli)
-                ##    pelisjson.pop(["peliculas"].index(peli))
-        with open("peliculas.json",'w') as archivoPelis: 
-            json.dump(pelisjson, archivoPelis)
-        return Response("Pelicula eliminada", HTTPStatus.OK)   
+            for pelis in pelisjson["peliculas"]:
+                if pelis["id"] == id_num:
+                    dondeID = pelisjson["peliculas"].index(pelis)
+            pelisjson["peliculas"].pop(dondeID)
+            with open("peliculas.json", 'w') as archivoPelis:
+                archivoPelis.seek(0) 
+                json.dump(pelisjson, archivoPelis, indent=4)
+        return Response("Pelicula eliminada", HTTPStatus.OK)  
+     
+
+
+                    # listaDeP = open("pruebaArch.json", "r+")
+                    # archivo = json.load(listaDeP)
+
+                    # listaDeP.seek(0)
+                    # archivo["peliculas"].pop(dondeID)
+                    # json.dump(archivo, listaDeP, indent=4)
+
     #Es para borrar una peli, verificar q no tenga comentarios
     #Siempre chequear que el usuario este registrado
 
@@ -184,26 +195,30 @@ def editar():
 
     datos_cliente = request.get_json()
     if "id" in datos_cliente: #TODO CHEQUEAR USUARIO
-        with open("peliculas.json", 'r+') as archivoPelis:
+        with open("pelisjson.json", 'r+') as archivoPelis:
             pelisjson = json.load(archivoPelis)
         for peli in pelisjson: 
-            if datos_cliente["id"]==peli["id"]:
-                peli['titulo']= datos_cliente['titulo']
-                peli['anio']= datos_cliente['anio']
-                peli['director']= datos_cliente['director']
-                peli['genero']= datos_cliente['genero']
-                peli['sinopsis']= datos_cliente['sinopsis']
-                peli['cartelera']= datos_cliente['cartelera']
-                return Response(peli, HTTPStatus.OK)
-            else:
-                return Response('Movie Not found', HTTPStatus.NOT_FOUND)
-    else:
-        return Response('Id invalido o nulo', HTTPStatus.BAD_REQUEST)
+            print(peli)
+        print("---")
+        print(datos_cliente)
+        #if (datos_cliente["id"])==peli["id"]:
+        return("listo")
+    #             peli['titulo']= datos_cliente['titulo']
+    #             peli['anio']= datos_cliente['anio']
+    #             peli['director']= datos_cliente['director']
+    #             peli['genero']= datos_cliente['genero']
+    #             peli['sinopsis']= datos_cliente['sinopsis']
+    #             peli['cartelera']= datos_cliente['cartelera']
+    #             archivoPelis.seek(0)
+    #             json.dump(pelisjson, archivoPelis,  indent=4) 
+    #             return Response(peli, HTTPStatus.OK)
+    #         else:
+    #             return Response('Movie Not found', HTTPStatus.NOT_FOUND)
+    # else:
+    #     return Response('Id invalido o nulo', HTTPStatus.BAD_REQUEST)
 
     #Editar solo los datos de la peli, no los comentarios
     #Siempre chequear que el usuario este registrado
-    a=a
-    return a
     
 #==============COMENTARIOS==============
 
@@ -261,11 +276,7 @@ def comentarios(id):
             else:
                 return Response("No se ha encontrado la pelicula", status=HTTPStatus.BAD_REQUEST)
 
-
-
-
 #=================ESTO ES LO DE LAS BUSQUEDAS=================
-#Falta q muestre lo del AMB y los q tienen Portada(una lista lo q tienen, otra lista los q no)
 
 @app.route("/generos")
 def buscarGeneros():
@@ -291,7 +302,6 @@ def buscarGeneros():
     
     else:
         return Response("Metodo no permitido", status=HTTPStatus.BAD_GATEWAY)
-
 
 #====================================
 #ACA VA LA PARTE DE LO YA CARGADO EN EL SISTEMA
@@ -353,30 +363,30 @@ def direccion(director):
     else:
         return Response("Metodo no permitido", status=HTTPStatus.BAD_GATEWAY)
 
-@app.route("/generos")
-def buscarGeneros():
-    if request.method == "GET":
+# @app.route("/generos")
+# def buscarGeneros():
+#     if request.method == "GET":
 
-        with open("peliculas.json") as listaDeP:
-            archivo = json.load(listaDeP)
+#         with open("peliculas.json") as listaDeP:
+#             archivo = json.load(listaDeP)
     
-        generos = []
+#         generos = []
 
-        cantidadPeliculas = len(archivo["peliculas"])
+#         cantidadPeliculas = len(archivo["peliculas"])
 
-        while (cantidadPeliculas > 0):
+#         while (cantidadPeliculas > 0):
 
-            for pelis in archivo["peliculas"]:
-                if (pelis["genero"] in generos):
-                    cantidadPeliculas -= 1
-                else:
-                    generos.append(pelis["genero"])
-                    cantidadPeliculas -= 1
+#             for pelis in archivo["peliculas"]:
+#                 if (pelis["genero"] in generos):
+#                     cantidadPeliculas -= 1
+#                 else:
+#                     generos.append(pelis["genero"])
+#                     cantidadPeliculas -= 1
 
-        return jsonify(generos)
+#         return jsonify(generos)
     
-    else:
-        return Response("Metodo no permitido", status=HTTPStatus.BAD_GATEWAY)
+#     else:
+#         return Response("Metodo no permitido", status=HTTPStatus.BAD_GATEWAY)
 
 
 @app.route("/portada", methods=["GET"]) #Devuelve las peliculas q tienen imagen
@@ -384,37 +394,4 @@ def portada():
     a=a
     return a
 
-#====================================
-#LISTAS
-#====================================
 
-peliculas = [
-    {
-        "id" : 127,
-        "nombre" : "Titanic",
-        "director" : "Burton",
-        "genero" : "Romance",
-        "cartelera" : None
-    },
-    {
-        "id" : 20,
-        "nombre" : "28",
-        "director" : "Williams",
-        "genero" : "Comedia",
-        "cartelera" : True
-    },
-    {
-        "id" : 5,
-        "nombre" : "Trucy",
-        "director" : "Shakespeare",
-        "genero" : "Drama",
-        "cartelera" : False
-    },
-    {
-        "id" : 65,
-        "nombre" : "Fabrica de chocolates",
-        "director" : "Burton",
-        "genero" : "Infaltil",
-        "cartelera" : True
-    }
-]
