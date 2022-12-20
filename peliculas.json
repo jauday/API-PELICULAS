@@ -24,12 +24,12 @@
         },
         {
             "id" : 456,
-            "titulo" : "28",
-            "anio" : 2018,
-            "director" : "Williams",
-            "genero" : "Comedia",
-            "sinopsis" : "Agregar otra sinopsis",
-            "cartelera" : null,
+            "titulo" : "28 Dias",
+            "anio" : 2000,
+            "director" : "Betty Thomas",
+            "genero" : "Drama",
+            "sinopsis" : "Como consecuencia de su adicción al alcohol, la periodista Gwen Cummings tiene un accidente con la limousina que ha robado a su hermana el día de su boda. Este hecho le obliga a ingresar en una clínica de rehabilitación en la que tendrá que permanecer durante 28 días, todo un mes. Allí conocerá a mucha gente, especialmente a su compañera de cuarto, y a un jugador de béisbol profesional llamado Eddie",
+            "cartelera" : true,
             "tieneCom": 0,
             "comentarios" : []
         },
