@@ -68,7 +68,15 @@ def login():
             if (("nombre" in datos_cliente) and ("password" in datos_cliente)):
                 
                 if ( (acceso["nombre"] == datos_cliente["nombre"]) and (acceso["password"] == datos_cliente["password"]) ):
-                    return Response("Bienvenido!", status=HTTPStatus.OK)
+                    if ((datos_cliente["nombre"] == "anonimo") and (datos_cliente["password"] == "anonimo")):
+                        
+                        global ingreso
+                        ingreso = False
+                        return Response("Has ingresado como anonimo!", status=HTTPStatus.OK)
+
+                    else:
+                        ingreso = True
+                        return Response("Bienvenido!", status=HTTPStatus.OK)
 
         return Response("Datos incorrectos", status=HTTPStatus.OK) #Fijarse dsps si queda el OK o el BadR
 
@@ -83,12 +91,12 @@ def login():
 #ACA VA LA PARTE DE LO QUE PUEDE HACER EL USUARIO
 #====================================
 
-@app.route("/home", methods=["POST"])
-def agregarPelis(): #Falta que compruebe si el usuario es anonimo o no
+@app.route("/home/agregar", methods=["POST"])
+def agregarPelis():
 
-    if request.method == "POST":
+    if ((request.method == "POST") and (ingreso == True)):
 
-        listaDeP = open("pruebaArch.json", "r+")
+        listaDeP = open("peliculas.json", "r+")
         archivo = json.load(listaDeP)
         #========================================
         id = 0
@@ -110,26 +118,46 @@ def agregarPelis(): #Falta que compruebe si el usuario es anonimo o no
 
         datos_cliente = request.get_json()
 
-        if "titulo" in datos_cliente: #Falta que chequee si estan los datos necesarios
-            nuevaPelicula = { #Falta q solo chequee duplicados en nombre y director
+        if (("titulo" and "anio" and "director" and "genero" and "sinopsis" and "cartelera") in datos_cliente):
+            nuevaPelicula = {
                 "id": id,
                 "titulo" : datos_cliente["titulo"],
                 "anio" : datos_cliente["anio"],
                 "director" : datos_cliente["director"],
                 "genero" : datos_cliente["genero"],
                 "sinopsis" : datos_cliente["sinopsis"],
-                "cartelera" : datos_cliente["cartelera"], #Hacer q pueda aceptar "" como none o false, y links 
-                "comentarios" : [],
+                "cartelera" : datos_cliente["cartelera"],
+                "AMB" : "alta", 
+                "comentarios" : []
             }
-                
+            
+            cantidadPeliculas = len(archivo["peliculas"])
+
+            while (cantidadPeliculas > 0):
+
+                for pelis in archivo["peliculas"]:
+                    if ((datos_cliente["titulo"] == pelis["titulo"]) and (datos_cliente["director"] == pelis["director"]) and (datos_cliente["anio"] == pelis["anio"]) and (datos_cliente["genero"] == pelis["genero"])):
+                        return Response("Esta pelicula ya esta agregada!", status=HTTPStatus.OK)
+
+                    else:
+                        cantidadPeliculas -= 1
+
+
             archivo["peliculas"].append(nuevaPelicula)
             listaDeP.seek(0)
             json.dump(archivo, listaDeP, indent = 4)
 
+            global tieneComentarios
+            tieneComentarios = False
+
             return jsonify(archivo["peliculas"][-1])
 
+        else:
+            return Response("Te has olvidado de algo!", status=HTTPStatus.OK)
+   
+
     else:
-        return Response("Metodo no permitido", status=HTTPStatus.BAD_GATEWAY)
+        return Response("No tienes permisos para realizar eso!", status=HTTPStatus.BAD_GATEWAY)
 
 
 @app.route("/home/<id>", methods=["DELETE"])
@@ -174,15 +202,95 @@ def editar():
 
     #Editar solo los datos de la peli, no los comentarios
     #Siempre chequear que el usuario este registrado
-    
-
-@app.route("/movies/<id>/comentarios", methods=["GET","PUT"])
-def comentarios(id):
-    #Es para mostrar los comentarios y agregar comentarios
-    #Con el GET los muestra, con el PUT los agrega
-    #Siempre chequear que el usuario este registrado
     a=a
     return a
+    
+#==============COMENTARIOS==============
+
+@app.route("/home/<id>/comentarios") #Este es con GET 
+def estructuraComentarios(id):
+    if request.method == "GET":
+        id_num = int(id)
+
+        estructuraComentarios = [
+            {
+                "cometario" : "Escriba aqui el comentario que desea dejar"
+            }
+        ]
+
+        return jsonify(estructuraComentarios)
+
+    else:
+        return Response("Metodo no permitido", status=HTTPStatus.BAD_GATEWAY)
+
+
+@app.route("/home/<id>/comentarios", methods=["GET","POST"]) #Este es con el POST
+def comentarios(id):
+
+    if ((request.method == "POST") and (ingreso == True)):
+
+        with open("peliculas.json") as listaDeP:
+            archivo = json.load(listaDeP)
+
+        id_num = int(id)
+
+        for pelis in archivo["peliculas"]:
+            if pelis["id"] == id_num:
+                dondeID = archivo["peliculas"].index(pelis)
+
+                #======================================
+                datos_cliente = request.get_json()
+
+                textoIngresado = datos_cliente
+
+                listaDePelis = open("peliculas.json", "r+")
+                archivoP = json.load(listaDePelis)
+    
+                for Pelis in archivoP["peliculas"]:
+
+                    indicePeliculaID = archivoP["peliculas"][dondeID]
+
+                    indicePeliculaID["comentarios"].append(textoIngresado["comentario"])
+                    listaDePelis.seek(0)
+                    json.dump(archivoP, listaDePelis, indent = 5)
+
+                    tieneComentarios = True #cambiar, poner adentro del json
+
+                    return jsonify(indicePeliculaID)
+
+            else:
+                return Response("No se ha encontrado la pelicula", status=HTTPStatus.BAD_REQUEST)
+
+
+
+
+#=================ESTO ES LO DE LAS BUSQUEDAS=================
+#Falta q muestre lo del AMB y los q tienen Portada(una lista lo q tienen, otra lista los q no)
+
+@app.route("/generos")
+def buscarGeneros():
+    if request.method == "GET":
+
+        with open("peliculas.json") as listaDeP:
+            archivo = json.load(listaDeP)
+    
+        generos = []
+
+        cantidadPeliculas = len(archivo["peliculas"])
+
+        while (cantidadPeliculas > 0):
+
+            for pelis in archivo["peliculas"]:
+                if (pelis["genero"] in generos):
+                    cantidadPeliculas -= 1
+                else:
+                    generos.append(pelis["genero"])
+                    cantidadPeliculas -= 1
+
+        return jsonify(generos)
+    
+    else:
+        return Response("Metodo no permitido", status=HTTPStatus.BAD_GATEWAY)
 
 
 #====================================
@@ -196,7 +304,7 @@ def comentarios(id):
 @app.route("/directores")
 def buscarDirectores():
     if request.method == "GET":
-        with open("pruebaArch.json") as listaDeP:
+        with open("peliculas.json") as listaDeP:
             archivo = json.load(listaDeP)
     
         director = []
@@ -222,7 +330,7 @@ def direccion(director):
 
     if request.method == "GET":
 
-        with open("pruebaArch.json") as listaDeP:
+        with open("peliculas.json") as listaDeP:
             archivo = json.load(listaDeP)
 
         direccionPeliculas = []
@@ -241,16 +349,15 @@ def direccion(director):
                     cantidadPeliculas -= 1
     
         return jsonify(direccionPeliculas)
-        
+
     else:
         return Response("Metodo no permitido", status=HTTPStatus.BAD_GATEWAY)
-
 
 @app.route("/generos")
 def buscarGeneros():
     if request.method == "GET":
-        
-        with open("pruebaArch.json") as listaDeP:
+
+        with open("peliculas.json") as listaDeP:
             archivo = json.load(listaDeP)
     
         generos = []
@@ -271,21 +378,43 @@ def buscarGeneros():
     else:
         return Response("Metodo no permitido", status=HTTPStatus.BAD_GATEWAY)
 
+
 @app.route("/portada", methods=["GET"]) #Devuelve las peliculas q tienen imagen
 def portada():
     a=a
     return a
 
-@app.route("/ABM", methods=["GET"]) #Devuelve la alta, baja, y no se q mas
-def ABM():
-    a=a
-    return a
-
 #====================================
-#FUNCIONALIDAD ADICIONAL
+#LISTAS
 #====================================
 
-@app.route("/buscar") #Es un buscador q devuelve peliculas, directores, generos, etc
-def buscar(): #Q vaya agregando tambien que fue lo ultimo buscado en otra lista
-    a=a
-    return a
+peliculas = [
+    {
+        "id" : 127,
+        "nombre" : "Titanic",
+        "director" : "Burton",
+        "genero" : "Romance",
+        "cartelera" : None
+    },
+    {
+        "id" : 20,
+        "nombre" : "28",
+        "director" : "Williams",
+        "genero" : "Comedia",
+        "cartelera" : True
+    },
+    {
+        "id" : 5,
+        "nombre" : "Trucy",
+        "director" : "Shakespeare",
+        "genero" : "Drama",
+        "cartelera" : False
+    },
+    {
+        "id" : 65,
+        "nombre" : "Fabrica de chocolates",
+        "director" : "Burton",
+        "genero" : "Infaltil",
+        "cartelera" : True
+    }
+]
