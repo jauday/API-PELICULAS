@@ -19,11 +19,38 @@ def home():
 #====================================
 
 
-@app.route("/home", methods=["GET"] ) #Hacer q sean solo las 10 ultimas. Hacerlo con un for/while y una variable q se el vaya sumando
+@app.route("/home") #Mostrar las ultimas diez peliculas de la cartelera
 def listaPelis():
-    with open("peliculas.json") as archivoPelis:
-        pelisjson = json.load(archivoPelis)
-    return pelisjson 
+    with open('peliculas.json') as listaDePelis:
+        archivo = json.load(listaDePelis)
+
+        listaVacia=["Ultimas 10 peliculas agregadas:"]
+        cantidadPelisEnLista = 0
+
+        cantidadPeliculas = len(archivo["peliculas"])
+        cantidadP = len(archivo["peliculas"])
+
+        revesPeliculas = []
+
+        while (cantidadP > 0):
+            for i in archivo["peliculas"]:
+                revesPeliculas.insert(0, i)
+                cantidadP -= 1
+
+        while (cantidadPeliculas > 0):
+
+            for peli in revesPeliculas:
+
+                if ((peli not in listaVacia) and (cantidadPelisEnLista < 10)):
+                    listaVacia.append(peli)
+                    cantidadPeliculas -= 1
+                    cantidadPelisEnLista += 1
+
+                else:
+                    cantidadPeliculas -= 1
+                    continue
+
+        return jsonify(listaVacia)
     
 @app.route("/home/<id>", methods=["GET"])
 def buscarPeli(id):
