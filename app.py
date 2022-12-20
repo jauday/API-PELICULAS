@@ -196,46 +196,66 @@ def agregarPelis():
         return Response("No tienes permisos para realizar eso!", status=HTTPStatus.BAD_GATEWAY)
 
 #==============BORRAR==============
+@app.route("/home/<id>") #Este es con GET
+def borrarEstructura():
+    estructura = [ {
+        "borrar" : "Solo ingrese el ID de la pelicula que desea borrar"
+        }
+    ]
 
-@app.route("/home/<id>", methods=["DELETE"])
+    return jsonify(estructura)
+
+@app.route("/home/<id>", methods=["GET","DELETE"])
 def borrar(id):
     
-    id_num = int(id)
-    if ((request.method == 'DELETE') and (ingreso == True)):   
-        if ((id_num) and (ingreso == True)):
-            with open("peliculas.json", 'r+') as archivoPelis:
-                pelisjson = json.load(archivoPelis)
-            for pelis in pelisjson["peliculas"]:
-                if ((pelis["id"] == id_num) and (pelis["tieneCom"] == 0)):
-                    dondeID = pelisjson["peliculas"].index(pelis)
-            pelisjson["peliculas"].pop(dondeID)
-            with open("peliculas.json", 'w') as archivoPelis:
-                archivoPelis.seek(0) 
-                json.dump(pelisjson, archivoPelis, indent=4)
-        return Response("Pelicula eliminada", HTTPStatus.OK)  
+    if ((request.method == "DELETE") and (ingreso == True)):
 
+        id_num = int(id)
+        if ((request.method == 'DELETE') and (ingreso == True)):   
+            if ((id_num) and (ingreso == True)):
+                with open("peliculas.json", 'r+') as archivoPelis:
+                    pelisjson = json.load(archivoPelis)
+                for pelis in pelisjson["peliculas"]:
+                    if ((pelis["id"] == id_num) and (pelis["tieneCom"] == 0)):
+                        dondeID = pelisjson["peliculas"].index(pelis)
+                pelisjson["peliculas"].pop(dondeID)
+                with open("peliculas.json", 'w') as archivoPelis:
+                    archivoPelis.seek(0) 
+                    json.dump(pelisjson, archivoPelis, indent=4)
+            return Response("Pelicula eliminada", HTTPStatus.OK) 
+
+    else:
+        return Response("No tienes permisos para realizar eso!", status=HTTPStatus.BAD_GATEWAY) 
+
+#==============EDITAR==============
 
 @app.route("/home/<id>", methods=["PUT"])
 def editar(id):
-    id_num = int(id)
-    datos_cliente = request.get_json()
-    if ((id_num) and (ingreso == True)):
-        with open("peliculas.json", 'r') as archivoPelis:
-            pelisjson = json.load(archivoPelis)
-        for peli in pelisjson["peliculas"]: 
-            if ((id_num == peli["id"]) and (peli["tieneCom"] == 0)):
-                peli['titulo']= datos_cliente['titulo']
-                peli['anio']= datos_cliente['anio']
-                peli['director']= datos_cliente['director']
-                peli['genero']= datos_cliente['genero']
-                peli['sinopsis']= datos_cliente['sinopsis']
-                peli['cartelera']= datos_cliente['cartelera']
-                with open("peliculas.json", 'w') as archivoPelis: 
-                    archivoPelis.seek(0)
-                    json.dump(pelisjson, archivoPelis,  indent=4) 
-            else: continue        
-        return Response("Pelicula actualizada", HTTPStatus.OK)
-    else: return Response('Id invalido o nulo', HTTPStatus.BAD_REQUEST)
+
+    if ((request.method == "PUT") and (ingreso == True)):
+
+        id_num = int(id)
+        datos_cliente = request.get_json()
+        if ((id_num) and (ingreso == True)):
+            with open("peliculas.json", 'r') as archivoPelis:
+                pelisjson = json.load(archivoPelis)
+            for peli in pelisjson["peliculas"]: 
+                if ((id_num == peli["id"]) and (peli["tieneCom"] == 0)):
+                    peli['titulo']= datos_cliente['titulo']
+                    peli['anio']= datos_cliente['anio']
+                    peli['director']= datos_cliente['director']
+                    peli['genero']= datos_cliente['genero']
+                    peli['sinopsis']= datos_cliente['sinopsis']
+                    peli['cartelera']= datos_cliente['cartelera']
+                    with open("peliculas.json", 'w') as archivoPelis: 
+                        archivoPelis.seek(0)
+                        json.dump(pelisjson, archivoPelis,  indent=4) 
+                else: continue        
+            return Response("Pelicula actualizada", HTTPStatus.OK)
+        else: return Response('Id invalido o nulo', HTTPStatus.BAD_REQUEST)
+
+    else:
+        return Response("No tienes permisos para realizar eso!", status=HTTPStatus.BAD_GATEWAY) 
 
     
 #==============COMENTARIOS==============
@@ -247,7 +267,7 @@ def estructuraComentarios(id):
 
         estructuraComentarios = [
             {
-                "cometario" : "Escriba aqui el comentario que desea dejar"
+                "comentario" : "Escriba aqui el comentario que desea dejar"
             }
         ]
 
@@ -273,7 +293,7 @@ def comentarios(id):
 
                 datos_cliente = request.get_json()
 
-                textoIngresado = datos_cliente
+                textoIngresado = datos_cliente["comentario"]
 
                 listaDePelis = open("peliculas.json", "r+")
                 archivoP = json.load(listaDePelis)
@@ -282,7 +302,7 @@ def comentarios(id):
 
                     indicePeliculaID = archivoP["peliculas"][dondeID]
 
-                    indicePeliculaID["comentarios"].append(textoIngresado["comentario"])
+                    indicePeliculaID["comentarios"].append(textoIngresado)
                     indicePeliculaID["tieneCom"]= 1
                     listaDePelis.seek(0)
                     json.dump(archivoP, listaDePelis, indent = 5)
