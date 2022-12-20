@@ -8,6 +8,7 @@
             "genero" : "Romance",
             "sinopsis" : "Aca va una sinopsis",
             "cartelera" : true,
+            "tieneCom": 0,
             "comentarios" : []
         },
         {
@@ -18,6 +19,7 @@
             "genero" : "Comedia",
             "sinopsis" : "Agregar otra sinopsis",
             "cartelera" : null,
+            "tieneCom": 0,
             "comentarios" : []
         },
         {
@@ -28,6 +30,7 @@
             "genero" : "Drama",
             "sinopsis" : "Agregar una sinopsis",
             "cartelera" : null,
+            "tieneCom": 0,
             "comentarios" : []
         },
         {
@@ -38,6 +41,7 @@
             "genero" : "Infaltil",
             "sinopsis" : "Hay un boleto y una fabrica de chocolates",
             "cartelera" : true,
+            "tieneCom": 0,
             "comentarios" : []
         }
         ,
@@ -49,6 +53,7 @@
             "genero" : "Thrilles",
             "sinopsis" : "Inventar una sinopsis",
             "cartelera" : true,
+            "tieneCom": 0,
             "comentarios" : []
         }
     ]

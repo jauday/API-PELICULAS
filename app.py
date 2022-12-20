@@ -139,7 +139,7 @@ def agregarPelis():
                 "genero" : datos_cliente["genero"],
                 "sinopsis" : datos_cliente["sinopsis"],
                 "cartelera" : datos_cliente["cartelera"],
-                "AMB" : "alta", 
+                "tieneCom": 0,
                 "comentarios" : []
             }
             
@@ -163,11 +163,8 @@ def agregarPelis():
             tieneComentarios = False
 
             return jsonify(archivo["peliculas"][-1])
-
         else:
             return Response("Te has olvidado de algo!", status=HTTPStatus.OK)
-   
-
     else:
         return Response("No tienes permisos para realizar eso!", status=HTTPStatus.BAD_GATEWAY)
 
@@ -177,7 +174,7 @@ def agregarPelis():
 def borrar(id):
     
     id_num = int(id)
-    if request.method == 'DELETE':    
+    if ((request.method == 'DELETE') and (ingreso == True)):   
         if id_num: #and ingreso: #TODO CHEQUEAR USUARIO
             with open("peliculas.json", 'r+') as archivoPelis:
                 pelisjson = json.load(archivoPelis)
@@ -196,7 +193,7 @@ def borrar(id):
 def editar(id):
     id_num = int(id)
     datos_cliente = request.get_json()
-    if id_num: #TODO CHEQUEAR USUARIO
+    if ((id_num) and (ingreso == True)):
         with open("peliculas.json", 'r') as archivoPelis:
             pelisjson = json.load(archivoPelis)
         for peli in pelisjson["peliculas"]: 
@@ -239,7 +236,7 @@ def estructuraComentarios(id):
 @app.route("/home/<id>/comentarios", methods=["GET","POST"]) #Este es con el POST
 def comentarios(id):
 
-    if ((request.method == "POST") and (ingreso == True)):
+    if (request.method == "POST"): #and (ingreso == True)):
 
         with open("peliculas.json") as listaDeP:
             archivo = json.load(listaDeP)
@@ -250,7 +247,6 @@ def comentarios(id):
             if pelis["id"] == id_num:
                 dondeID = archivo["peliculas"].index(pelis)
 
-                #======================================
                 datos_cliente = request.get_json()
 
                 textoIngresado = datos_cliente
@@ -263,25 +259,16 @@ def comentarios(id):
                     indicePeliculaID = archivoP["peliculas"][dondeID]
 
                     indicePeliculaID["comentarios"].append(textoIngresado["comentario"])
+                    indicePeliculaID["tieneCom"]= 1
                     listaDePelis.seek(0)
                     json.dump(archivoP, listaDePelis, indent = 5)
 
-                    tieneComentarios = True #cambiar, poner adentro del json
-
                     return jsonify(indicePeliculaID)
 
-            else:
-                return Response("No se ha encontrado la pelicula", status=HTTPStatus.BAD_REQUEST)
+            else: return Response("No se ha encontrado la pelicula", status=HTTPStatus.BAD_REQUEST)
 
     else:
         return Response("No tienes permisos para realizar eso!", status=HTTPStatus.BAD_GATEWAY)
-
-
-
-
-#====================================
-#ACA VA LA PARTE DE LO YA CARGADO EN EL SISTEMA
-#====================================
 
 @app.route("/generos")
 def buscarGeneros():
@@ -307,14 +294,6 @@ def buscarGeneros():
     
     else:
         return Response("Metodo no permitido", status=HTTPStatus.BAD_GATEWAY)
-
-#====================================
-#ACA VA LA PARTE DE LO YA CARGADO EN EL SISTEMA
-#====================================
-
-#Siempre devuelve lo q se le pide al json.
-#Ej: Si es la aprte del ABM, va peli por peli y buscando todos los amd, y despues los devuelve en un jsonify
-
 
 @app.route("/directores")
 def buscarDirectores():
@@ -368,7 +347,6 @@ def direccion(director):
     else:
         return Response("Metodo no permitido", status=HTTPStatus.BAD_GATEWAY)
 
-
 @app.route("/portada")
 def portada():
     if request.method == "GET":
@@ -382,31 +360,31 @@ def portada():
 
 #         while (cantidadPeliculas > 0):
 
-            for pelis in archivo["peliculas"]: #si es iigual a 
-                if (pelis["cartelera"] == " "):
+    #         for pelis in archivo["peliculas"]: #si es iigual a 
+    #             if (pelis["cartelera"] == " "):
 
-                    pelicula = []
+    #                 pelicula = []
 
-                    pelicula.append(pelis["id"])
-                    pelicula.append(pelis["titulo"])
-                    sinPortada.append(pelicula)
+    #                 pelicula.append(pelis["id"])
+    #                 pelicula.append(pelis["titulo"])
+    #                 sinPortada.append(pelicula)
 
-                    cantidadPeliculas -= 1
+    #                 cantidadPeliculas -= 1
 
-                else: 
-                    pelicula = []
+    #             else: 
+    #                 pelicula = []
 
-                    pelicula.append(pelis["id"])
-                    pelicula.append(pelis["titulo"])
-                    conPortada.append(pelicula)
+    #                 pelicula.append(pelis["id"])
+    #                 pelicula.append(pelis["titulo"])
+    #                 conPortada.append(pelicula)
 
-                    cantidadPeliculas -= 1
+    #                 cantidadPeliculas -= 1
 
-        portadas = []
-        portadas.append(conPortada)
-        portadas.append(sinPortada)
+    #     portadas = []
+    #     portadas.append(conPortada)
+    #     portadas.append(sinPortada)
 
-        return jsonify(portadas)
+    #     return jsonify(portadas)
 
-    else:
-        return Response("Metodo no permitido", status=HTTPStatus.BAD_GATEWAY)
+    # else:
+    #     return Response("Metodo no permitido", status=HTTPStatus.BAD_GATEWAY)
