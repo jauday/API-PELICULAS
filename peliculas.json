@@ -6,51 +6,129 @@
             "anio" : 2009,
             "director" : "Burton",
             "genero" : "Romance",
-            "sinopsis" : "Aca va una sinopsis",
+            "sinopsis" : "Esta pelicula relata la relación de Jack Dawson y Rose DeWitt Bukater, dos jóvenes que se conocen y se enamoran a bordo del transatlántico RMS Titanic en su viaje inaugural desde Southampton (Inglaterra) a Nueva York (Estados Unidos) en abril de 1912.",
             "cartelera" : true,
             "comentarios" : []
         },
         {
             "id" : 20,
-            "titulo" : "28",
-            "anio" : 2018,
-            "director" : "Williams",
-            "genero" : "Comedia",
-            "sinopsis" : "Agregar otra sinopsis",
-            "cartelera" : null,
+            "titulo" : "Seven",
+            "anio" : 1995,
+            "director" : "David Fincher",
+            "genero" : "Thriller psicologico",
+            "sinopsis" : "En esta pelicula unos detectives, Somerset y David Mills, se ven involucrados en una investigación de una serie de asesinatos basados en los siete pecados capitales: gula, pereza, soberbia, avaricia, envidia, lujuria e ira.",
+            "cartelera" : " ",
             "comentarios" : []
         },
         {
             "id" : 5,
-            "titulo" : "Trucy",
-            "anio" : 2013,
-            "director" : "Shakespeare",
+            "titulo" : "La milla verde",
+            "anio" : 1999,
+            "director" : "Frank Darabont",
             "genero" : "Drama",
-            "sinopsis" : "Agregar una sinopsis",
-            "cartelera" : null,
+            "sinopsis" : "Esta película está basada en un relato de Stephen King y narra la historia de Paul Edgecomb, un hombre de avanzada edad que recuerda su experiencia como vigilante en la prisión de Cold Mountain en 1932. Durante su etapa como trabajador, Paul tuvo entre sus presos a un hombre acusado de asesinar a dos niñas, el cual tenía poderes sobrenaturales.",
+            "cartelera" : " ",
             "comentarios" : []
         },
         {
             "id" : 65,
             "titulo" : "Fabrica de chocolates",
             "anio" : 1990,
-            "director" : "Burton",
+            "director" : "Tim Burton",
             "genero" : "Infaltil",
-            "sinopsis" : "Hay un boleto y una fabrica de chocolates",
+            "sinopsis" : "Esta pelicula narra la historia de Charlie Bucket, un niño rodeado de pobreza extrema, cuyo destino cambia al conocer al excéntrico Willy Wonka, dueño de la fábrica de chocolate cercana a su casa",
             "cartelera" : true,
             "comentarios" : []
         }
         ,
         {
             "id" : 355,
-            "titulo" : "Tomorrow",
-            "anio" : 1970,
-            "director" : "Espuria",
-            "genero" : "Thrilles",
-            "sinopsis" : "Inventar una sinopsis",
+            "titulo" : "Persona",
+            "anio" : 1966,
+            "director" : "Ingmar Bergman",
+            "genero" : "Thriller",
+            "sinopsis" : "Elisabeth, su protagonista, es una actriz que se queda muda durante una de sus interpretaciones teatrales. Después de un tiempo hospitalizada, la joven sigue sin recuperar la voz. Entonces, se muda a una casa al lado del mar con Alma, su enfermera, quien trata de recomponerla. Sin embargo, poco a poco, la relación entre ambas va cambiando.",
             "cartelera" : true,
             "comentarios" : []
         }
+        {
+            "id" : 210,
+            "titulo" : "Stalker",
+            "anio" : 1979,
+            "director" : "Andréi Tarkovski",
+            "genero" : "Ciencia Ficcion",
+            "sinopsis" : "En un país desconocido ha aparecido una “zona” donde, tras caer un meteorito, ocurren acontecimientos inexplicables a nivel físico y geográfico. En este lugar, custodiado por las autoridades, un guía (Stalker) se dedica a acompañar a aquellas personas que quieren indagar en esa extraña zona, entre ellos un escritor y un científico.",
+            "cartelera" : " ",
+            "comentarios" : []
+        }
+        ,
+        {
+            "id" : 450,
+            "titulo" : "Interstellar",
+            "anio" : 2014,
+            "director" : "Christopher Nolan",
+            "genero" : "Ciencia Ficcion",
+            "sinopsis" : "Interstellar presenta a un equipo de científicos, liderados por Cooper, cuya misión es encontrar un planeta en otra galaxia. Este grupo de investigadores planea salvar a la especie humana del planeta Tierra, un lugar donde ya no se puede vivir.",
+            "cartelera" : true,
+            "comentarios" : []
+        }
+        ,
+        {
+            "id" : 35,
+            "titulo" : "Matrix",
+            "anio" : 1999,
+            "director" : "Lilly y Lana Wachowski",
+            "genero" : "Accion",
+            "sinopsis" : "En un mundo dominado por la inteligencia artificial, el informático Neo parece ser el único humano capaz de liberar al hombre de esta supeditación. Esto lo descubre cuando recibe la visita de Morfeo, quien le ofrece dos píldoras de diferente color. Si toma la azul, el mundo continuará con esa ilusión de falsa realidad. Si toma la roja, podrá descubrir la verdad.",
+            "cartelera" : true,
+            "comentarios" : []
+        }
+        ,
+        {
+            "id" : 78,
+            "titulo" : "Up",
+            "anio" : 2009,
+            "director" : "Pete Docter y Bob Peterson",
+            "genero" : "Infantil",
+            "sinopsis" : "Cuando el anciano Carl Fredricksen enviuda, emprende una aventura para conseguir realizar un viejo sueño. Para ello, este vendedor de globos amarra a su casa miles de globos y viaja rumbo a Cataratas del Paraíso (Venezuela). Junto a él va un niño entrañable llamado Russell, el compañero más aventurero que jamás podría haber imaginado que lo acompañaría.",
+            "cartelera" : " ",
+            "comentarios" : []
+        }
+        ,
+        {
+            "id" : 321,
+            "titulo" : "Good Will Hunting",
+            "anio" : 1997,
+            "director" : "Gus Van Sant",
+            "genero" : "Romance",
+            "sinopsis" : "Esta película narra la vida de Will, un joven rebelde con don privilegiado para las matemáticas. Cuando sus profesores descubren su talento, el protagonista tiene que enfrentarse a un gran dilema: seguir con su vida normal, con un trabajo común y sin preocupaciones, o escoger un nuevo camino y aprovechar su ingenio.",
+            "cartelera" : " ",
+            "comentarios" : []
+        }
+        ,
+        {
+            "id" : 400,
+            "titulo" : "Una mente maravillosa",
+            "anio" : 2001,
+            "director" : "Ron Howard",
+            "genero" : "Romance",
+            "sinopsis" : "También conocida como Una mente brillante (A Beautiful Mind), la pelicula está inspirada en la vida John Forbes Nash Jr, un brillante matemático que formuló teorías revolucionarias, cuya carrera se vio mermada a causa de la esquizofrenia. Aunque eso no impidió que consiguiera el Premio Nobel en 1994.            ",
+            "cartelera" : true,
+            "comentarios" : []
+        }
+        ,
+        {
+            "id" : 670,
+            "titulo" : "El show de Truman",
+            "anio" : 1998,
+            "director" : "Peter Weir",
+            "genero" : "Comedia",
+            "sinopsis" : "Esta pelicula cuenta la historia de un hombre común, Truman, al que nunca le sucede nada. Sin embargo, pronto descubre que está inmerso en un gran reality show y que todos aquellos a los que considera sus amigos, en realidad, son actores sumidos en un espectáculo.            ",
+            "cartelera" : true,
+            "comentarios" : []
+        }
+        
+
     ]
 
 }
