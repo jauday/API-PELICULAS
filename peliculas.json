@@ -1,157 +1,147 @@
 {
-    "peliculas" : [
-        {
-            "id" : 127,
-            "titulo" : "Titanic",
-            "anio" : 2009,
-            "director" : "Burton",
-            "genero" : "Romance",
-            "sinopsis" : "Esta pelicula relata la relación de Jack Dawson y Rose DeWitt Bukater, dos jóvenes que se conocen y se enamoran a bordo del transatlántico RMS Titanic en su viaje inaugural desde Southampton (Inglaterra) a Nueva York (Estados Unidos) en abril de 1912.",
-            "cartelera" : true,
-            "tieneCom": 0,
-            "comentarios" : []
-        },
-        {
-            "id" : 20,
-            "titulo" : "Seven",
-            "anio" : 1995,
-            "director" : "David Fincher",
-            "genero" : "Thriller psicologico",
-            "sinopsis" : "En esta pelicula unos detectives, Somerset y David Mills, se ven involucrados en una investigación de una serie de asesinatos basados en los siete pecados capitales: gula, pereza, soberbia, avaricia, envidia, lujuria e ira.",
-            "cartelera" : " ",
-            "tieneCom": 0,
-            "comentarios" : []
-        },
-        {
-            "id" : 456,
-            "titulo" : "28 Dias",
-            "anio" : 2000,
-            "director" : "Betty Thomas",
-            "genero" : "Drama",
-            "sinopsis" : "Como consecuencia de su adicción al alcohol, la periodista Gwen Cummings tiene un accidente con la limousina que ha robado a su hermana el día de su boda. Este hecho le obliga a ingresar en una clínica de rehabilitación en la que tendrá que permanecer durante 28 días, todo un mes. Allí conocerá a mucha gente, especialmente a su compañera de cuarto, y a un jugador de béisbol profesional llamado Eddie",
-            "cartelera" : true,
-            "tieneCom": 0,
-            "comentarios" : []
-        },
-        {
-            "id" : 5,
-            "titulo" : "La milla verde",
-            "anio" : 1999,
-            "director" : "Frank Darabont",
-            "genero" : "Drama",
-            "sinopsis" : "Esta película está basada en un relato de Stephen King y narra la historia de Paul Edgecomb, un hombre de avanzada edad que recuerda su experiencia como vigilante en la prisión de Cold Mountain en 1932. Durante su etapa como trabajador, Paul tuvo entre sus presos a un hombre acusado de asesinar a dos niñas, el cual tenía poderes sobrenaturales.",
-            "cartelera" : " ",
-            "tieneCom": 0,
-            "comentarios" : []
-        },
-        {
-            "id" : 65,
-            "titulo" : "Fabrica de chocolates",
-            "anio" : 1990,
-            "director" : "Tim Burton",
-            "genero" : "Infaltil",
-            "sinopsis" : "Esta pelicula narra la historia de Charlie Bucket, un niño rodeado de pobreza extrema, cuyo destino cambia al conocer al excéntrico Willy Wonka, dueño de la fábrica de chocolate cercana a su casa",
-            "cartelera" : true,
-            "tieneCom": 0,
-            "comentarios" : []
-        }
-        ,
-        {
-            "id" : 355,
-            "titulo" : "Persona",
-            "anio" : 1966,
-            "director" : "Ingmar Bergman",
-            "genero" : "Thriller",
-            "sinopsis" : "Elisabeth, su protagonista, es una actriz que se queda muda durante una de sus interpretaciones teatrales. Después de un tiempo hospitalizada, la joven sigue sin recuperar la voz. Entonces, se muda a una casa al lado del mar con Alma, su enfermera, quien trata de recomponerla. Sin embargo, poco a poco, la relación entre ambas va cambiando.",
-            "cartelera" : true,
-            "tieneCom": 0,
-            "comentarios" : []
-        },
-        {
-            "id" : 210,
-            "titulo" : "Stalker",
-            "anio" : 1979,
-            "director" : "Andréi Tarkovski",
-            "genero" : "Ciencia Ficcion",
-            "sinopsis" : "En un país desconocido ha aparecido una “zona” donde, tras caer un meteorito, ocurren acontecimientos inexplicables a nivel físico y geográfico. En este lugar, custodiado por las autoridades, un guía (Stalker) se dedica a acompañar a aquellas personas que quieren indagar en esa extraña zona, entre ellos un escritor y un científico.",
-            "cartelera" : " ",
-            "tieneCom": 0,
-            "comentarios" : []
-        }
-        ,
-        {
-            "id" : 450,
-            "titulo" : "Interstellar",
-            "anio" : 2014,
-            "director" : "Christopher Nolan",
-            "genero" : "Ciencia Ficcion",
-            "sinopsis" : "Interstellar presenta a un equipo de científicos, liderados por Cooper, cuya misión es encontrar un planeta en otra galaxia. Este grupo de investigadores planea salvar a la especie humana del planeta Tierra, un lugar donde ya no se puede vivir.",
-            "cartelera" : true,
-            "tieneCom": 0,
-            "comentarios" : []
-        }
-        ,
-        {
-            "id" : 35,
-            "titulo" : "Matrix",
-            "anio" : 1999,
-            "director" : "Lilly y Lana Wachowski",
-            "genero" : "Accion",
-            "sinopsis" : "En un mundo dominado por la inteligencia artificial, el informático Neo parece ser el único humano capaz de liberar al hombre de esta supeditación. Esto lo descubre cuando recibe la visita de Morfeo, quien le ofrece dos píldoras de diferente color. Si toma la azul, el mundo continuará con esa ilusión de falsa realidad. Si toma la roja, podrá descubrir la verdad.",
-            "cartelera" : true,
-            "tieneCom": 0,
-            "comentarios" : []
-        }
-        ,
-        {
-            "id" : 78,
-            "titulo" : "Up",
-            "anio" : 2009,
-            "director" : "Pete Docter y Bob Peterson",
-            "genero" : "Infantil",
-            "sinopsis" : "Cuando el anciano Carl Fredricksen enviuda, emprende una aventura para conseguir realizar un viejo sueño. Para ello, este vendedor de globos amarra a su casa miles de globos y viaja rumbo a Cataratas del Paraíso (Venezuela). Junto a él va un niño entrañable llamado Russell, el compañero más aventurero que jamás podría haber imaginado que lo acompañaría.",
-            "cartelera" : " ",
-            "tieneCom": 0,
-            "comentarios" : []
-        }
-        ,
-        {
-            "id" : 321,
-            "titulo" : "Good Will Hunting",
-            "anio" : 1997,
-            "director" : "Gus Van Sant",
-            "genero" : "Romance",
-            "sinopsis" : "Esta película narra la vida de Will, un joven rebelde con don privilegiado para las matemáticas. Cuando sus profesores descubren su talento, el protagonista tiene que enfrentarse a un gran dilema: seguir con su vida normal, con un trabajo común y sin preocupaciones, o escoger un nuevo camino y aprovechar su ingenio.",
-            "cartelera" : " ",
-            "tieneCom": 0,
-            "comentarios" : []
-        }
-        ,
-        {
-            "id" : 400,
-            "titulo" : "Una mente maravillosa",
-            "anio" : 2001,
-            "director" : "Ron Howard",
-            "genero" : "Romance",
-            "sinopsis" : "También conocida como Una mente brillante (A Beautiful Mind), la pelicula está inspirada en la vida John Forbes Nash Jr, un brillante matemático que formuló teorías revolucionarias, cuya carrera se vio mermada a causa de la esquizofrenia. Aunque eso no impidió que consiguiera el Premio Nobel en 1994.            ",
-            "cartelera" : true,
-            "tieneCom": 0,
-            "comentarios" : []
-        }
-        ,
-        {
-            "id" : 670,
-            "titulo" : "El show de Truman",
-            "anio" : 1998,
-            "director" : "Peter Weir",
-            "genero" : "Comedia",
-            "sinopsis" : "Esta pelicula cuenta la historia de un hombre común, Truman, al que nunca le sucede nada. Sin embargo, pronto descubre que está inmerso en un gran reality show y que todos aquellos a los que considera sus amigos, en realidad, son actores sumidos en un espectáculo.            ",
-            "cartelera" : true,
-            "tieneCom": 0,
-            "comentarios" : []
-        }
-        
-
-    ]
-
+     "peliculas": [
+          {
+               "id": 127,
+               "titulo": "Titanic",
+               "anio": 2009,
+               "director": "Burton",
+               "genero": "Romance",
+               "sinopsis": "Esta pelicula relata la relaci\u00f3n de Jack Dawson y Rose DeWitt Bukater, dos j\u00f3venes que se conocen y se enamoran a bordo del transatl\u00e1ntico RMS Titanic en su viaje inaugural desde Southampton (Inglaterra) a Nueva York (Estados Unidos) en abril de 1912.",
+               "cartelera": true,
+               "tieneCom": 0,
+               "comentarios": []
+          },
+          {
+               "id": 20,
+               "titulo": "Seven",
+               "anio": 1995,
+               "director": "David Fincher",
+               "genero": "Thriller psicologico",
+               "sinopsis": "En esta pelicula unos detectives, Somerset y David Mills, se ven involucrados en una investigaci\u00f3n de una serie de asesinatos basados en los siete pecados capitales: gula, pereza, soberbia, avaricia, envidia, lujuria e ira.",
+               "cartelera": " ",
+               "tieneCom": 0,
+               "comentarios": []
+          },
+          {
+               "id": 456,
+               "titulo": "28 Dias",
+               "anio": 2000,
+               "director": "Betty Thomas",
+               "genero": "Drama",
+               "sinopsis": "Como consecuencia de su adicci\u00f3n al alcohol, la periodista Gwen Cummings tiene un accidente con la limousina que ha robado a su hermana el d\u00eda de su boda. Este hecho le obliga a ingresar en una cl\u00ednica de rehabilitaci\u00f3n en la que tendr\u00e1 que permanecer durante 28 d\u00edas, todo un mes. All\u00ed conocer\u00e1 a mucha gente, especialmente a su compa\u00f1era de cuarto, y a un jugador de b\u00e9isbol profesional llamado Eddie",
+               "cartelera": true,
+               "tieneCom": 0,
+               "comentarios": []
+          },
+          {
+               "id": 5,
+               "titulo": "La milla verde",
+               "anio": 1999,
+               "director": "Frank Darabont",
+               "genero": "Drama",
+               "sinopsis": "Esta pel\u00edcula est\u00e1 basada en un relato de Stephen King y narra la historia de Paul Edgecomb, un hombre de avanzada edad que recuerda su experiencia como vigilante en la prisi\u00f3n de Cold Mountain en 1932. Durante su etapa como trabajador, Paul tuvo entre sus presos a un hombre acusado de asesinar a dos ni\u00f1as, el cual ten\u00eda poderes sobrenaturales.",
+               "cartelera": " ",
+               "tieneCom": 0,
+               "comentarios": []
+          },
+          {
+               "id": 65,
+               "titulo": "Fabrica de chocolates",
+               "anio": 1990,
+               "director": "Tim Burton",
+               "genero": "Infaltil",
+               "sinopsis": "Esta pelicula narra la historia de Charlie Bucket, un ni\u00f1o rodeado de pobreza extrema, cuyo destino cambia al conocer al exc\u00e9ntrico Willy Wonka, due\u00f1o de la f\u00e1brica de chocolate cercana a su casa",
+               "cartelera": true,
+               "tieneCom": 0,
+               "comentarios": []
+          },
+          {
+               "id": 355,
+               "titulo": "Persona",
+               "anio": 1966,
+               "director": "Ingmar Bergman",
+               "genero": "Thriller",
+               "sinopsis": "Elisabeth, su protagonista, es una actriz que se queda muda durante una de sus interpretaciones teatrales. Despu\u00e9s de un tiempo hospitalizada, la joven sigue sin recuperar la voz. Entonces, se muda a una casa al lado del mar con Alma, su enfermera, quien trata de recomponerla. Sin embargo, poco a poco, la relaci\u00f3n entre ambas va cambiando.",
+               "cartelera": true,
+               "tieneCom": 0,
+               "comentarios": []
+          },
+          {
+               "id": 210,
+               "titulo": "Stalker",
+               "anio": 1979,
+               "director": "Andr\u00e9i Tarkovski",
+               "genero": "Ciencia Ficcion",
+               "sinopsis": "En un pa\u00eds desconocido ha aparecido una \u201czona\u201d donde, tras caer un meteorito, ocurren acontecimientos inexplicables a nivel f\u00edsico y geogr\u00e1fico. En este lugar, custodiado por las autoridades, un gu\u00eda (Stalker) se dedica a acompa\u00f1ar a aquellas personas que quieren indagar en esa extra\u00f1a zona, entre ellos un escritor y un cient\u00edfico.",
+               "cartelera": " ",
+               "tieneCom": 0,
+               "comentarios": []
+          },
+          {
+               "id": 450,
+               "titulo": "Interstellar",
+               "anio": 2014,
+               "director": "Christopher Nolan",
+               "genero": "Ciencia Ficcion",
+               "sinopsis": "Interstellar presenta a un equipo de cient\u00edficos, liderados por Cooper, cuya misi\u00f3n es encontrar un planeta en otra galaxia. Este grupo de investigadores planea salvar a la especie humana del planeta Tierra, un lugar donde ya no se puede vivir.",
+               "cartelera": true,
+               "tieneCom": 0,
+               "comentarios": []
+          },
+          {
+               "id": 35,
+               "titulo": "Matrix",
+               "anio": 1999,
+               "director": "Lana Wachowski",
+               "genero": "Accion",
+               "sinopsis": "En un mundo dominado por la inteligencia artificial, el inform\u00e1tico Neo parece ser el \u00fanico humano capaz de liberar al hombre de esta supeditaci\u00f3n. Esto lo descubre cuando recibe la visita de Morfeo, quien le ofrece dos p\u00edldoras de diferente color. Si toma la azul, el mundo continuar\u00e1 con esa ilusi\u00f3n de falsa realidad. Si toma la roja, podr\u00e1 descubrir la verdad.",
+               "cartelera": true,
+               "tieneCom": 0,
+               "comentarios": []
+          },
+          {
+               "id": 78,
+               "titulo": "Up",
+               "anio": 2009,
+               "director": "Bob Peterson",
+               "genero": "Infantil",
+               "sinopsis": "Cuando el anciano Carl Fredricksen enviuda, emprende una aventura para conseguir realizar un viejo sue\u00f1o. Para ello, este vendedor de globos amarra a su casa miles de globos y viaja rumbo a Cataratas del Para\u00edso (Venezuela). Junto a \u00e9l va un ni\u00f1o entra\u00f1able llamado Russell, el compa\u00f1ero m\u00e1s aventurero que jam\u00e1s podr\u00eda haber imaginado que lo acompa\u00f1ar\u00eda.",
+               "cartelera": " ",
+               "tieneCom": 0,
+               "comentarios": []
+          },
+          {
+               "id": 321,
+               "titulo": "Good Will Hunting",
+               "anio": 1997,
+               "director": "Gus Van Sant",
+               "genero": "Romance",
+               "sinopsis": "Esta pel\u00edcula narra la vida de Will, un joven rebelde con don privilegiado para las matem\u00e1ticas. Cuando sus profesores descubren su talento, el protagonista tiene que enfrentarse a un gran dilema: seguir con su vida normal, con un trabajo com\u00fan y sin preocupaciones, o escoger un nuevo camino y aprovechar su ingenio.",
+               "cartelera": " ",
+               "tieneCom": 0,
+               "comentarios": []
+          },
+          {
+               "id": 400,
+               "titulo": "Una mente maravillosa",
+               "anio": 2001,
+               "director": "Ron Howard",
+               "genero": "Romance",
+               "sinopsis": "Tambi\u00e9n conocida como Una mente brillante (A Beautiful Mind), la pelicula est\u00e1 inspirada en la vida John Forbes Nash Jr, un brillante matem\u00e1tico que formul\u00f3 teor\u00edas revolucionarias, cuya carrera se vio mermada a causa de la esquizofrenia. Aunque eso no impidi\u00f3 que consiguiera el Premio Nobel en 1994.            ",
+               "cartelera": true,
+               "tieneCom": 0,
+               "comentarios": []
+          },
+          {
+               "id": 670,
+               "titulo": "El show de Truman",
+               "anio": 1998,
+               "director": "Peter Weir",
+               "genero": "Comedia",
+               "sinopsis": "Esta pelicula cuenta la historia de un hombre com\u00fan, Truman, al que nunca le sucede nada. Sin embargo, pronto descubre que est\u00e1 inmerso en un gran reality show y que todos aquellos a los que considera sus amigos, en realidad, son actores sumidos en un espect\u00e1culo.            ",
+               "cartelera": true,
+               "tieneCom": 0,
+               "comentarios": []
+          }
+     ]
 }

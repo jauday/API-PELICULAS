@@ -21,7 +21,7 @@ def home():
 
 @app.route("/home") #Mostrar las ultimas diez peliculas de la cartelera
 def listaPelis():
-    with open('peliculas.json') as listaDePelis:
+    with open("peliculas.json", encoding="utf8") as listaDePelis:
         archivo = json.load(listaDePelis)
 
         listaVacia=["Ultimas 10 peliculas agregadas:"]
@@ -55,7 +55,7 @@ def listaPelis():
 @app.route("/home/<id>", methods=["GET"])
 def buscarPeli(id):
 
-    with open("peliculas.json") as archivoPelis:
+    with open("peliculas.json", encoding="utf8") as archivoPelis:
         pelisJson = json.load(archivoPelis)
 
     id_num = int(id)
@@ -115,7 +115,7 @@ def login():
 #====================================
 
 #==============AGREGAR==============
-@app.route("/home/agregar")
+@app.route("/home/agregar") #Este es con el GET
 def estructurAgregar():
     estructura = [ {
         "titulo" : " ",
@@ -130,12 +130,12 @@ def estructurAgregar():
 
     return jsonify(estructura)
 
-@app.route("/home/agregar", methods=["GET","POST"]) #Este es con el GET
+@app.route("/home/agregar", methods=["GET","POST"])
 def agregarPelis():
 
     if ((request.method == "POST") and (ingreso == True)):
 
-        listaDeP = open("peliculas.json", "r+")
+        listaDeP = open("peliculas.json", "r+", encoding="utf8")
         archivo = json.load(listaDeP)
         #========================================
         id = 0
@@ -196,16 +196,7 @@ def agregarPelis():
         return Response("No tienes permisos para realizar eso!", status=HTTPStatus.BAD_GATEWAY)
 
 #==============BORRAR==============
-@app.route("/home/<id>") #Este es con GET
-def borrarEstructura():
-    estructura = [ {
-        "borrar" : "Solo ingrese el ID de la pelicula que desea borrar"
-        }
-    ]
-
-    return jsonify(estructura)
-
-@app.route("/home/<id>", methods=["GET","DELETE"])
+@app.route("/home/<id>", methods=["DELETE"])
 def borrar(id):
     
     if ((request.method == "DELETE") and (ingreso == True)):
@@ -218,11 +209,13 @@ def borrar(id):
                 for pelis in pelisjson["peliculas"]:
                     if ((pelis["id"] == id_num) and (pelis["tieneCom"] == 0)):
                         dondeID = pelisjson["peliculas"].index(pelis)
-                pelisjson["peliculas"].pop(dondeID)
-                with open("peliculas.json", 'w') as archivoPelis:
-                    archivoPelis.seek(0) 
-                    json.dump(pelisjson, archivoPelis, indent=4)
-            return Response("Pelicula eliminada", HTTPStatus.OK) 
+                        pelisjson["peliculas"].pop(dondeID)
+                        with open("peliculas.json", 'w') as archivoPelis:
+                            archivoPelis.seek(0) 
+                            json.dump(pelisjson, archivoPelis, indent=4)
+                            return Response("Pelicula eliminada", HTTPStatus.OK)
+            return Response("La peliucula tiene comentarios, no se puede eliminar", HTTPStatus.OK)
+            
 
     else:
         return Response("No tienes permisos para realizar eso!", status=HTTPStatus.BAD_GATEWAY) 
@@ -280,7 +273,7 @@ def estructuraComentarios(id):
 @app.route("/home/<id>/comentarios", methods=["GET","POST"]) #Este es con el POST
 def comentarios(id):
 
-    if (request.method == "POST"): #and (ingreso == True)):
+    if ((request.method == "POST") and (ingreso == True)):
 
         with open("peliculas.json") as listaDeP:
             archivo = json.load(listaDeP)
@@ -309,16 +302,20 @@ def comentarios(id):
 
                     return jsonify(indicePeliculaID)
 
-            else: return Response("No se ha encontrado la pelicula", status=HTTPStatus.BAD_REQUEST)
+            #else: return Response("No se ha encontrado la pelicula", status=HTTPStatus.BAD_REQUEST)
 
     else:
         return Response("No tienes permisos para realizar eso!", status=HTTPStatus.BAD_GATEWAY)
+
+#====================================
+#BUSCADOR
+#====================================
 
 @app.route("/generos")
 def buscarGeneros():
     if request.method == "GET":
 
-        with open("peliculas.json") as listaDeP:
+        with open("peliculas.json", encoding="utf8") as listaDeP:
             archivo = json.load(listaDeP)
     
         generos = []
@@ -342,7 +339,7 @@ def buscarGeneros():
 @app.route("/directores")
 def buscarDirectores():
     if request.method == "GET":
-        with open("peliculas.json") as listaDeP:
+        with open("peliculas.json", encoding="utf8") as listaDeP:
             archivo = json.load(listaDeP)
     
         director = []
@@ -368,7 +365,7 @@ def direccion(director):
 
     if request.method == "GET":
 
-        with open("peliculas.json") as listaDeP:
+        with open("peliculas.json", encoding="utf8") as listaDeP:
             archivo = json.load(listaDeP)
 
         direccionPeliculas = []
@@ -394,7 +391,7 @@ def direccion(director):
 @app.route("/portada")
 def portada():
     if request.method == "GET":
-        with open("peliculas.json") as listaDeP:
+        with open("peliculas.json", encoding="utf8") as listaDeP:
             archivo = json.load(listaDeP)
     
         conPortada = ["Con cartelera"]
