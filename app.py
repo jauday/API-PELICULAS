@@ -186,8 +186,7 @@ def borrar(id):
                 archivoPelis.seek(0) 
                 json.dump(pelisjson, archivoPelis, indent=4)
         return Response("Pelicula eliminada", HTTPStatus.OK)  
-    #Es para borrar una peli, verificar q no tenga comentarios
-    #Siempre chequear que el usuario este registrado
+
 
 @app.route("/home/<id>", methods=["PUT"])
 def editar(id):
@@ -211,8 +210,6 @@ def editar(id):
         return Response("Pelicula actualizada", HTTPStatus.OK)
     else: return Response('Id invalido o nulo', HTTPStatus.BAD_REQUEST)
 
-    #Editar solo los datos de la peli, no los comentarios
-    #Siempre chequear que el usuario este registrado
     
 #==============COMENTARIOS==============
 
@@ -356,12 +353,12 @@ def portada():
         conPortada = ["Con cartelera"]
         sinPortada = ["Sin cartelera"]
 
-#         cantidadPeliculas = len(archivo["peliculas"])
+        cantidadPeliculas = len(archivo["peliculas"])
 
-#         while (cantidadPeliculas > 0):
+        while (cantidadPeliculas > 0):
 
-    #         for pelis in archivo["peliculas"]: #si es iigual a 
-    #             if (pelis["cartelera"] == " "):
+            for pelis in archivo["peliculas"]:
+                if (pelis["cartelera"] == " "):
 
     #                 pelicula = []
 
