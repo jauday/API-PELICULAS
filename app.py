@@ -360,28 +360,28 @@ def portada():
             for pelis in archivo["peliculas"]:
                 if (pelis["cartelera"] == " "):
 
-    #                 pelicula = []
+                    pelicula = []
 
-    #                 pelicula.append(pelis["id"])
-    #                 pelicula.append(pelis["titulo"])
-    #                 sinPortada.append(pelicula)
+                    pelicula.append(pelis["id"])
+                    pelicula.append(pelis["titulo"])
+                    sinPortada.append(pelicula)
 
-    #                 cantidadPeliculas -= 1
+                    cantidadPeliculas -= 1
 
-    #             else: 
-    #                 pelicula = []
+                else: 
+                    pelicula = []
 
-    #                 pelicula.append(pelis["id"])
-    #                 pelicula.append(pelis["titulo"])
-    #                 conPortada.append(pelicula)
+                    pelicula.append(pelis["id"])
+                    pelicula.append(pelis["titulo"])
+                    conPortada.append(pelicula)
 
-    #                 cantidadPeliculas -= 1
+                    cantidadPeliculas -= 1
 
-    #     portadas = []
-    #     portadas.append(conPortada)
-    #     portadas.append(sinPortada)
+        portadas = []
+        portadas.append(conPortada)
+        portadas.append(sinPortada)
 
-    #     return jsonify(portadas)
+        return jsonify(portadas)
 
-    # else:
-    #     return Response("Metodo no permitido", status=HTTPStatus.BAD_GATEWAY)
+    else:
+        return Response("Metodo no permitido", status=HTTPStatus.BAD_GATEWAY)
